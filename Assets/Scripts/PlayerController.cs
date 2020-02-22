@@ -65,4 +65,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag=="Enemy")
+        {
+            Destroy(collision.gameObject);
+            rb.velocity = new Vector2(rb.velocity.x, 0.5f*jump * Time.deltaTime);
+            anim.SetBool("Jump", true);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag=="Enemy")
+        {
+            Debug.Log("Enter");
+        }
+    }
 }

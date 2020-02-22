@@ -34,6 +34,6 @@ public class Game : MonoBehaviour
     private void ShowCollections()
     {
         cherryCount.text = cherry.ToString();
-        gemCount.text = gemCount.ToString();
+        gemCount.text = gem.ToString();
     }
 }
