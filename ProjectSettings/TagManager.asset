@@ -50,6 +50,9 @@ TagManager:
   - name: Environment
     uniqueID: 1816934383
     locked: 0
+  - name: Map
+    uniqueID: 1054982699
+    locked: 0
   - name: Player
     uniqueID: 3053651209
     locked: 0

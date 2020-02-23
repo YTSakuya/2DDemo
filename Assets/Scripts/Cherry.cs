@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Cherry : Collections
 {
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "Player")
-    //    {
-    //        game.AddCherry();
-    //        Destroy(this.gameObject);
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            game.AddCherry();
+            Destroy(this.gameObject);
+        }
+    }
 }

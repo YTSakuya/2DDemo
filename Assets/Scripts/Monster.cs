@@ -9,4 +9,9 @@ public class Monster : MonoBehaviour
     {
         game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
     }
+
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
+    }
 }

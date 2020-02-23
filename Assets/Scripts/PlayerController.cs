@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private CapsuleCollider2D coll;
+
+    private bool isHurt = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        PlayerMove();
+        if(!isHurt)
+            PlayerMove();
         AnimSwitch();
     }
 
@@ -63,13 +67,23 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Fall", false);
         }
+        else if(isHurt)
+        {
+            anim.SetFloat("Run", 0);
+            anim.SetBool("Hurt", true);
+            if (Mathf.Abs(rb.velocity.x) < 0.2f)
+            {
+                isHurt = false;
+                anim.SetBool("Hurt", false);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag=="Enemy")
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             rb.velocity = new Vector2(rb.velocity.x, 0.5f*jump * Time.deltaTime);
             anim.SetBool("Jump", true);
         }
@@ -79,7 +93,16 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag=="Enemy")
         {
-            Debug.Log("Enter");
+            if(transform.position.x>collision.transform.position.x)
+            {
+                rb.velocity = new Vector2(5, rb.velocity.y);
+                isHurt = true;
+            }
+            else if(transform.position.x < collision.transform.position.x)
+            {
+                rb.velocity = new Vector2(-5, rb.velocity.y);
+                isHurt = true;
+            }
         }
     }
 }
